@@ -283,11 +283,16 @@ const getDecimals = async() => {
   return decimals
 }
 
+const getBalanceOf = async(owner) => {
+  let balanceOf = await contract.methods.balanceOf(owner).call()
+  return balanceOf
+}
 
 const returnValues = async() => {
   console.log('symbol is: ' + await getSymbol())
   console.log('name is: ' + await getName())
   console.log('decimals is: ' + await getDecimals())
+  console.log('balance of ' + owner + ' is: ' + await getBalanceOf(owner))
 }
 
 returnValues()
