@@ -261,7 +261,7 @@ const abi= [
 ]
 
 // this is your contract address
-const address = "0xBE0BD0C0dD8ca29ebb5d51feD9b1C85d299F874d"  
+const address = "0x579842D11f62b5f3b3E4ffd71031dfBb855c0C4e"  
 
 // this is the contract owner
 const owner = "0x1cF88d2952A6d7FB2f6F9E76BEB2A7904c9504BA"
@@ -270,11 +270,24 @@ const contract = new web3.eth.Contract(abi, address)
 
 const getSymbol = async() => {
  let symbol = await contract.methods.symbol().call()
-return 'symbol is: ' + symbol
+return symbol
 }
 
+const getName = async()=> {
+  let name = await contract.methods.name().call()
+  return name
+}
+
+const getDecimals = async() => {
+  let decimals = await contract.methods.decimals().call()
+  return decimals
+}
+
+
 const returnValues = async() => {
-  console.log(await getSymbol())
+  console.log('symbol is: ' + await getSymbol())
+  console.log('name is: ' + await getName())
+  console.log('decimals is: ' + await getDecimals())
 }
 
 returnValues()
