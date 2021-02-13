@@ -260,5 +260,25 @@ const abi= [
 	}
 ]
 
+// this is your contract address
+const address = "0xBE0BD0C0dD8ca29ebb5d51feD9b1C85d299F874d"  
+
+// this is the contract owner
+const owner = "0x1cF88d2952A6d7FB2f6F9E76BEB2A7904c9504BA"
+
+const contract = new web3.eth.Contract(abi, address)
+
+const getSymbol = async() => {
+ let symbol = await contract.methods.symbol().call()
+return 'symbol is: ' + symbol
+}
+
+const returnValues = async() => {
+  console.log(await getSymbol())
+}
+
+returnValues()
+
+
 
 
