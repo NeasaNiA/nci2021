@@ -13,6 +13,3 @@ To install the dependencies, make sure you are in the nci2021 folder and run:
 
 ```$npm install```
 
-```$npm i web3```
-
-```$npm i ethereumjs-tx```
