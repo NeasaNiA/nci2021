@@ -1,0 +1,25 @@
+{
+  "name": "nci2021",
+  "version": "1.0.0",
+  "description": "hey, this is the readme.md file",
+  "main": "lab4_contract_method_async.js",
+  "dependencies": {
+    "ethereumjs-tx": "^2.1.2",
+    "web3": "^1.3.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eoinco/nci2021.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eoinco/nci2021/issues"
+  },
+  "homepage": "https://github.com/eoinco/nci2021#readme"
+}
