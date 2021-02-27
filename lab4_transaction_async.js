@@ -43,8 +43,10 @@ const transferFunds = async(account1, account2, amount) => {
   const serializedTx = tx.serialize()
   const raw = '0x' + serializedTx.toString('hex')
   let txHash = await sendTransaction(raw)
-  console.log("err: " + txHash.err)
-  console.log("transaction hash: " + txHash.txHash)
+  console.log('original object: ' + txHash)
+  //console.log("err: " + txHash.err)
+  console.log("transaction hash: " + txHash.transactionHash)
+  console.log("transaction in block " + txHash.blockNumber)
 }
 
 const transfer = async() => {
