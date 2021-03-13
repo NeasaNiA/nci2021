@@ -2,7 +2,7 @@
   "name": "nci2021",
   "version": "1.0.0",
   "description": "hey, this is the readme.md file",
-  "main": "lab4_contract_method_async.js",
+  "main": "handlers.js",
   "dependencies": {
     "ethereumjs-tx": "^2.1.2",
     "express": "^4.17.1",
@@ -16,7 +16,6 @@
     "type": "git",
     "url": "git+https://github.com/eoinco/nci2021.git"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {

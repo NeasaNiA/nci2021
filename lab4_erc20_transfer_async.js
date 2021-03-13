@@ -341,7 +341,7 @@ const transfer = async() => {
 
 //transfer()
 
-module.exports = { getSymbol, getTotalSupply }
+module.exports = { getSymbol, getTotalSupply, transfer }
 
 
 
