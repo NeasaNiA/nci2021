@@ -7,8 +7,9 @@ const web3 = new Web3("https://ropsten.infura.io/v3/1e86eba9862b4b78b37cfaf9675f
 const account1 = "0x1cF88d2952A6d7FB2f6F9E76BEB2A7904c9504BA"  // this is the address of account 1 - this guy has all the MONEH
 const account2 = "0x3d6d5A49d89eC0760E3607b287aE7693FA8D0c9A"  // this is the address of account 2 - this guy has very little MONEH
 
-const privateKey1 = Buffer.from('...', 'hex')
+const privateKey1 = Buffer.from('9d2f7aec9940170065871dfe5050ef1d6c6332c5d977dea6660aeaf9201a7ede', 'hex')
 
+//0x9EfEBD4E11813298b813e09338528CA895ef4726
 
 //secp256k1 (elliptic curve - 256bits)
 //metamask seed phrase (12 words) - > BIP -> create 128bits of randomness
@@ -292,7 +293,7 @@ const transferFunds = async(account2, amount) => {
   const txObject = {
     nonce: web3.utils.toHex(txCount),
     gasLimit: web3.utils.toHex(500000),
-    gasPrice: web3.utils.toHex(web3.utils.toWei('130', 'gwei')),
+    gasPrice: web3.utils.toHex(web3.utils.toWei('100', 'gwei')),
     to: contractAddress,
     data: contract.methods.transfer(account2, amount).encodeABI()
   }
@@ -314,14 +315,33 @@ const getBalanceOf = async(account) => {
   return balanceOf
 }
 
-const transfer = async() => {
-  await getBalanceOf(account1)
-  await getBalanceOf(account2)
-
-  await transferFunds(account2, '50')
+const getSymbol = async() => {
+  let symbol = await contract.methods.symbol().call()
+  return symbol
 }
 
-transfer()
+const getTotalSupply = async() => {
+  let totalSupply = await contract.methods.totalSupply().call()
+  return totalSupply
+}
+
+const transfer = async() => {
+  account1bal = await getBalanceOf(account1)
+  console.log("account 1 balance is: " + account1bal)
+
+  symbol = await getSymbol()
+  console.log('symbol of erc20 contract is: ' + symbol)
+
+  supply = await getTotalSupply()
+  console.log('total supply of ' + symbol + " is: " + supply )
+  await getBalanceOf(account2)
+
+  await transferFunds(account2, '50000000000000000000')
+}
+
+//transfer()
+
+module.exports = { getSymbol, getTotalSupply }
 
 
 
