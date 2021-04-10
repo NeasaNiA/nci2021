@@ -22,4 +22,26 @@ To access the routes using curl:
 
 ```curl -get 'http://localhost:8080/transfer```
 
+ - dockerise the project
+ - load a file of accounts
+ - run the distribution
+ - run distro via handler (post)
+ - do some fun crypto
+ - 
+
+
+### Docker Containers 
+
+To run a docker container, you need to do the following steps:
+
+#### Build it
+
+To build the docker container:
+
+```docker build -t nci/lab2021 .```
+
+run it
+interact with it
+
+
 
