@@ -41,7 +41,27 @@ To build the docker container:
 ```docker build -t nci/lab2021 .```
 
 run it
-interact with it
+
+#### Interact with it
+
+View docker images
+
+```docker image ls```
+
+To remove all docker containers etc. (if something goes wrong)
+
+```docker system prune```
+
+Remove docker images
+```docker image prune -a -f```
+
+View running docker containers
+``` docker ps```
+
+
+Run the image in docker
+
+
 
 
 
