@@ -1,14 +1,21 @@
 const Tx = require('ethereumjs-tx').Transaction
-
 const Web3 = require('web3')
 
-const web3 = new Web3("https://ropsten.infura.io/v3/1e86eba9862b4b78b37cfaf9675ffcad")
+require('dotenv').config()
+envOwnerAddress = process.env.OWNER_ADDRESS
+envOwnerPrivateKey = process.env.OWNER_PRIVATE_KEY
+envInfuraKey = process.env.INFURA_KEY
+envContractAddress = process.env.CONTRACT_ADDRESS
 
-const account1 = "0x1cF88d2952A6d7FB2f6F9E76BEB2A7904c9504BA"  // this is the address of account 1 - this guy has all the MONEH
+const web3 = new Web3("https://ropsten.infura.io/v3/" + envInfuraKey)
+
+const account1 = envOwnerAddress  // this is the address of account 1 - this guy has all the MONEH
+const privateKey1 = Buffer.from(envOwnerPrivateKey, 'hex')
+
+
+
+
 const account2 = "0x3d6d5A49d89eC0760E3607b287aE7693FA8D0c9A"  // this is the address of account 2 - this guy has very little MONEH
-
-const privateKey1 = Buffer.from('9d2f7aec9940170065871dfe5050ef1d6c6332c5d977dea6660aeaf9201a7ede', 'hex')
-
 //0x9EfEBD4E11813298b813e09338528CA895ef4726
 
 //secp256k1 (elliptic curve - 256bits)
@@ -17,7 +24,7 @@ const privateKey1 = Buffer.from('9d2f7aec9940170065871dfe5050ef1d6c6332c5d977dea
 // derivation path: m/44’/60’/0’/0/1 -> make the same public/private keypair
 // public key -> hashed/chopped -> eth address
 
-const contractAddress = '0x54Fa8F812dB6c4B01aFD7522059eca4ff03f7471'
+const contractAddress = envContractAddress
 const contractABI = [
 	{
 		"inputs": [],
@@ -339,9 +346,36 @@ const transfer = async() => {
   await transferFunds(account2, '50000000000000000000')
 }
 
+const transferFromOwner = async(contractAddress, toAccount, amount) => {
+
+  // get an instance of the contract
+  const contract = new web3.eth.Contract(contractABI, contractAddress)
+
+  // run a transfer from owner to account of amount
+  let txCount = await web3.eth.getTransactionCount(account1)
+
+  console.log(`nonce for owner account (${account1}) is: ${txCount}`)
+
+  const txObject = {
+    nonce: web3.utils.toHex(txCount),
+    gasLimit: web3.utils.toHex(500000),
+    gasPrice: web3.utils.toHex(web3.utils.toWei('100', 'gwei')),
+    to: contractAddress,
+    data: contract.methods.transfer(toAccount, amount).encodeABI()
+  }
+
+  const tx = new Tx(txObject, {chain:'ropsten', hardfork:'petersburg'})
+  tx.sign(privateKey1)
+
+  const serializedTx = tx.serialize()
+  const raw = '0x' + serializedTx.toString('hex')
+  let txHash = await sendTransaction(raw)
+  return `transaction ${txHash.transactionHash} mined in block ${txHash.blockNumber}`
+}
+
 //transfer()
 
-module.exports = { getSymbol, getTotalSupply, transfer }
+module.exports = { getSymbol, getTotalSupply, transfer, transferFromOwner }
 
 
 
