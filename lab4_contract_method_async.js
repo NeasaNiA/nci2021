@@ -1,6 +1,12 @@
 const Web3 = require("web3")
 
-const rpcURL = "https://ropsten.infura.io/v3/1e86eba9862b4b78b37cfaf9675ffcad"
+require('dotenv').config()
+envOwnerAddress = process.env.OWNER_ADDRESS
+envOwnerPrivateKey = process.env.OWNER_PRIVATE_KEY
+envInfuraKey = process.env.INFURA_KEY
+envContractAddress = process.env.CONTRACT_ADDRESS
+
+const rpcURL = "https://ropsten.infura.io/v3/"+ envInfuraKey
 
 const web3 = new Web3(rpcURL)
 
@@ -261,10 +267,10 @@ const abi= [
 ]
 
 // this is your contract address
-const address = "0x579842D11f62b5f3b3E4ffd71031dfBb855c0C4e"  
+const address = envContractAddress 
 
-// this is the contract owner
-const owner = "0x1cF88d2952A6d7FB2f6F9E76BEB2A7904c9504BA"
+// this is the contract owner (who deployed the contract)
+const owner = envOwnerAddress
 
 const contract = new web3.eth.Contract(abi, address)
 
@@ -288,6 +294,19 @@ const getBalanceOf = async(owner) => {
   return balanceOf
 }
 
+const getOwnerBalance = async() => {
+  let balanceOf = await contract.methods.balanceOf(owner).call()
+  return balanceOf
+}
+
+const getBalance = async(contractAddress, account) => {
+// set up the contract object using the contract address
+// take the account and call the balance method
+const contract = new web3.eth.Contract(abi, contractAddress)
+let balanceOf = await contract.methods.balanceOf(account).call()
+return balanceOf
+} 
+
 const getTotalSupply = async() =>  {
   let totalSupply = await contract.methods.totalSupply().call()
   return totalSupply
@@ -303,8 +322,6 @@ const returnValues = async() => {
   console.log(`total supply of %s is %s`, symbol, await getTotalSupply())
 }
 
-returnValues()
-
-
-
+module.exports = { getBalance }
+//returnValues()
 
