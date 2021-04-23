@@ -1,5 +1,5 @@
 const express = require("express")
-let erc20 = require('./lab4_erc20_transfer_async.js')
+let erc20 = require('./erc20_transfer_async.js')
 let distribute = require('./distribute.js')
 
 const app = express()
