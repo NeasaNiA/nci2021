@@ -5,7 +5,7 @@ hey, this is the readme.md file
 
 To download this code, run 
 
-```$git clone https://github.com/eoinco/nci2021.git```
+```$git clone https://github.com/NeasaNiA/nci2021```
 
 This will create a folder called nci2021 and the code will be downloaded to that folder.
 
