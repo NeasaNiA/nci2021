@@ -1,8 +1,8 @@
 var fs = require("fs")
 var BigNumber = require("big-number")
 
-let contract = require("./lab4_contract_method_async.js")
-let transfer = require("./lab4_erc20_transfer_async.js")
+let contract = require("./contract_method_async.js")
+let transfer = require("./erc20_transfer_async.js")
 
 require('dotenv').config()
 envOwnerAddress = process.env.OWNER_ADDRESS
