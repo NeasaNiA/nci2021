@@ -28,6 +28,6 @@ app.post('/distribute', async(req, res) => {
   res.send(await distribute.distribute(addresses))
 })
 
-const port = 8090
+const port = 9000
 app.listen(port, () => console.log(`listening on port ${port}...`))
 
