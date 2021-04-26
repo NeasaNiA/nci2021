@@ -2,6 +2,7 @@ hey, this is the readme.md file
 
 ### Contract used in this project  ###
 https://ropsten.etherscan.io/address/0x548d1da3487a01c3bc6fa92c694fad44ecfe2e03
+Transacitons associated with this contract can be viewed there
 
 ### Prerequisites  ###
 Node.js installed
