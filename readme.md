@@ -36,7 +36,7 @@ To run locally
 
 To access the routes using curl:
 
-```curl -get 'http://localhost:9000/transfer```
+```curl -get 'http://localhost:9000/symbol```
 
 To distribute 5% of the remaining tokens to the owner account evenly amongst a list of supplied accounts. The list of accounts is passed into /distribute URL using JSON as following curl command:
 
